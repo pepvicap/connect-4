@@ -60,8 +60,20 @@ body {
 
 .board .game {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   gap: 10px;
+}
+
+.square {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 48px;
 }
 
 .turn {
@@ -82,8 +94,15 @@ body {
 }
 
 .square.is-selected {
-  color: #fff;
   background: #09f;
+}
+
+.square.blue {
+  background-color: blue;
+}
+
+.square.red {
+  background-color: red;
 }
 
 .winner {
@@ -116,15 +135,4 @@ body {
   border: 2px solid #eee;
   border-radius: 10px;
   padding: 20px;
-}
-
-.square {
-  width: 100px;
-  height: 100px;
-  border: 2px solid #eee;
-  border-radius: 5px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  font-size: 48px;
 }
