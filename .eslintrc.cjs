@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
+    'standard',
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
@@ -16,5 +17,5 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-  },
+  }
 }
