@@ -1,6 +1,6 @@
 import './App.css'
 import { WinnerModal } from './components/WinnerModal'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import confetti from 'canvas-confetti'
 
 const TURNS = {
@@ -9,10 +9,13 @@ const TURNS = {
 }
 
 const Cell = ({ turnCell, gameCell, updateBoard, index }) => {
-  const cssTurnCell = turnCell === TURNS.blue ? 'blue is-selected' : turnCell === TURNS.red ? 'red is-selected' : ''
+  const cssTurnCell = turnCell === TURNS.blue ? 'blue' : turnCell === TURNS.red ? 'red' : ''
   const cssGameCell = gameCell === TURNS.blue ? 'blue' : gameCell === TURNS.red ? 'red' : ''
-  const handleClick = () => { updateBoard(index) }
-  return <span onClick={handleClick} className={`square ${cssGameCell} ${cssTurnCell}`}></span>
+
+  const cellRef = useRef(null)
+
+  const handleClick = () => { updateBoard(index, cellRef) }
+  return <span id={`cell-${index}`} ref={cellRef} onClick={handleClick} className={`cell ${cssGameCell} ${cssTurnCell}`}></span>
 }
 
 function App () {
@@ -23,7 +26,7 @@ function App () {
   })
   const [turn, setTurn] = useState(() => {
     const savedTurn = window.localStorage.getItem('turn')
-    return savedTurn || TURNS.X
+    return savedTurn || TURNS.blue
   })
 
   const [blueWins, setBlueWins] = useState(() => {
@@ -37,18 +40,70 @@ function App () {
   })
 
   const [winner, setWinner] = useState(null)
-  const updateBoard = (index) => {
+
+  const updateBoard = (index, cellRef) => {
     // check if cell is already occupied or if there is a winner
-    if (board[index] || winner) return
+    if (winner) return
+
+    // calculate column from index
+    const column = index % 7
+
+    // find the first occupied cell from the top in the column
+    let lowestUnoccupiedCellIndex = -1
+    let counter = 0
+    for (let i = column; i <= 35 + column; i += 7) {
+      if (board[i] !== null) {
+        lowestUnoccupiedCellIndex = i - 7
+        break
+      } else {
+        // add animation classes to the cell
+        const cell = document.getElementById(`cell-${i}`)
+        cell.classList.add('is-dropping', `animation-${counter}`)
+        const currentCounter = counter
+        counter++
+        // remove animation classes after 1 second
+        setTimeout(() => { // Modify this line
+          cell.classList.remove('is-dropping', `animation-${currentCounter}`)
+        }, 1000)
+      }
+    }
+
+    // if all cells in the column are unoccupied, set lowestUnoccupiedCellIndex to the bottom cell
+    if (lowestUnoccupiedCellIndex === -1) {
+      lowestUnoccupiedCellIndex = 35 + column
+    }
+
+    // calculate the delay regarding the last row
+    const row = Math.floor(lowestUnoccupiedCellIndex / 7)
+    const delay = row * 0.167
+    const cell = document.getElementById(`cell-${lowestUnoccupiedCellIndex}`)
+    cell.style.transitionDelay = `${delay}s`
+    setTimeout(() => { // Modify this line
+      cell.style.transitionDelay = ''
+    }, 1000)
+
+    // if the column is fully occupied, stop and return
+    if (lowestUnoccupiedCellIndex < column) return
 
     // update board
     const newBoard = [...board]
-    newBoard[index] = turn
+    newBoard[lowestUnoccupiedCellIndex] = turn
     setBoard(newBoard)
 
     // change turn
     const newTurn = turn === TURNS.blue ? TURNS.red : TURNS.blue
+    updateBeforeColor(turn === TURNS.blue ? 'blue' : 'red')
     setTurn(newTurn)
+
+    const boardGame = document.querySelectorAll('.game')
+    boardGame.forEach(game => {
+      game.style.pointerEvents = 'none'
+    })
+    setTimeout(() => {
+      boardGame.forEach(game => {
+        game.style.pointerEvents = 'auto'
+      })
+    }, 1000)
 
     // save to local storage
     window.localStorage.setItem('board', JSON.stringify(newBoard))
@@ -136,6 +191,19 @@ function App () {
     window.localStorage.removeItem('redWins')
   }
 
+  const updateBeforeColor = (color) => {
+    // Create a new style element
+    const style = document.createElement('style')
+
+    // Set the CSS text
+    style.textContent = `
+      .cell::before {
+        background-color: ${color};
+      }
+    `
+    // Append the style element to the document head
+    document.head.append(style)
+  }
   return (
     <>
     <main className='board'>
@@ -143,7 +211,8 @@ function App () {
     <p>Blue wins: {blueWins}</p>
     <p>Red wins: {redWins}</p>
     <button onClick={resetGame}>Reset game</button>
-    <button onClick={resetWins}>Reset wins</button>    <section>
+    <button onClick={resetWins}>Reset wins</button>
+    <section>
       <Cell turnCell={turn}></Cell>
     </section>
     <section className="game">
