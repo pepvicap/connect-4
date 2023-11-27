@@ -57,12 +57,12 @@ export const lowestUnoccupiedCell = (board, index) => {
     } else {
       // add animation classes to the cell
       const cell = document.getElementById(`cell-${i}`)
-      cell.classList.add('is-dropping', `animation-${counter}`)
+      cell.classList.add('is-dropping', `is-animation-${counter}`)
       const currentCounter = counter
       counter++
       // remove animation classes after 1 second
       setTimeout(() => {
-        cell.classList.remove('is-dropping', `animation-${currentCounter}`)
+        cell.classList.remove('is-dropping', `is-animation-${currentCounter}`)
       }, 1000)
     }
   }
@@ -93,7 +93,7 @@ export const updateBeforeColor = (color) => {
 
   // Set the CSS text
   style.textContent = `
-      .cell::before {
+      .c-board__cell::before {
         background-color: ${color};
       }
     `
@@ -102,7 +102,7 @@ export const updateBeforeColor = (color) => {
 }
 
 export const pointerEVents = () => {
-  const boardGame = document.querySelectorAll('.game')
+  const boardGame = document.querySelectorAll('.c-board .c-board__game')
   boardGame.forEach(game => {
     game.style.pointerEvents = 'none'
   })

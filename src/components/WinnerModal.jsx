@@ -4,12 +4,11 @@ export function WinnerModal ({ winner, resetGame }) {
   const winnerText = winner === false ? 'It is a tie!' : `${winner} Wins!`
 
   return (
-        <section className="winner">
-            <div className='text'>
-                <h2 className='win'>
+        <section className="c-modal">
+            <div className='c__text'>
+                <h2>
                     {winnerText}
                 </h2>
-                <button onClick={resetGame}>Play again</button>
             </div>
         </section>
   )

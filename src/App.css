@@ -1,24 +1,59 @@
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: #EEE;
+  background-color: #223F4D;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --orange: #E66210;
+  --blue: #36BCAF;
+}
+
+@font-face {
+  font-family: "Aquire";
+  src: url("fonts/Aquire.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "AquireLight";
+  src: url("fonts/AquireLight.otf") format("opentype");
+  font-weight: 300;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Raleway", sans-serif;
+  src: url("fonts/Raleway-Regular.woff2") format("woff2"),
+  url("fonts/Raleway-Regular.woff") format("woff"),
+  url("fonts/Raleway-Regular.ttf") format("truetype"),
+  url("fonts/Raleway-Regular.eot") format("embedded-opentype");
+  font-weight: 400;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Raleway", sans-serif;
+  src: url("fonts/Raleway-Regular.woff2") format("woff2"),
+  url("fonts/Raleway-Regular.woff") format("woff"),
+  url("fonts/Raleway-Regular.ttf") format("truetype"),
+  url("fonts/Raleway-Regular.eot") format("embedded-opentype");
+  font-weight: 700;
+  font-display: swap
 }
 
 body {
   margin: 0;
   display: flex;
   justify-content: center;
+  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -29,87 +64,43 @@ body {
   box-sizing: border-box;
 }
 
-.board {
-  width: fit-content;
-  margin: 40px auto;
-  text-align: center;
+h1 {
+  font-family: "Aquire";
+  font-size: 60px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #EEE;
+  margin-bottom: 20px;
 }
 
-.board h1 {
-  color: #eee;
-  margin-bottom: 16px;
-}
-
-.board button {
-  padding: 8px 12px;
-  margin: 25px;
-  background: transparent;
-  border: 2px solid #eee;
-  color: #eee;
-  width: 100px;
-  border-radius: 5px;
-  transition: 0.2s;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.board button:hover {
-  background: #eee;
-  color: #222;
-}
-
-.board .game {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  gap: 10px;
-}
-
-.turn {
-  display: flex;
-  justify-content: center;
-  margin: 15px auto;
-  width: fit-content;
-  position: relative;
-  border-radius: 10px;
-}
-
-
-.winner {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  display: grid;
-  place-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.winner .text {
-  background: #111;
-  height: 300px;
-  width: 320px;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.winner .win {
+h2 {
   margin: 0 auto;
   width: fit-content;
   border: 2px solid #eee;
   border-radius: 10px;
   padding: 20px;
+  text-transform: uppercase;
 }
 
-/* Testing */
+em {
+  display: block;
+  font-family: "Aquire";
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-style: normal;
+}
 
-/* Animation keyframes */
+.is-orange > em{
+  color: var(--orange);
+}
+
+.is-blue > em{
+  color: var(--blue);
+}
+
+/* Animations */
+
 @keyframes drop {
   0% {
     opacity: 0;
@@ -124,17 +115,170 @@ body {
   }
 }
 
-.turn .cell,
-.winner .cell {
-  width: 70px;
-  height: 70px;
-  pointer-events: none;
-  border-color: transparent;
+/* Buttons */
+
+
+.btns {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 2em 1.8em;
+  border-radius: 3.9em;
+  box-shadow: -3px -10px 20px -16px rgba(255, 255, 255, 0.1), 3px 10px 20px -10px rgba(0, 0, 0, 0.2);
 }
 
-.cell {
-  width: 80px;
-  height: 80px;
+.btns:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 3.9em;
+  box-shadow: -50px -102px 40px -120px #40bf73, -6px -40px 40px -40px rgba(255, 255, 255, 0.1), -3px -10px 20px -16px rgba(255, 255, 255, 0.1), 6px 40px 40px -32px rgba(0, 0, 0, 0.4), 3px 10px 20px -10px rgba(0, 0, 0, 0.2);
+  filter: blur(2px);
+}
+
+.btn {
+  --btn-inner: hsla(144deg 10% 22% / 35%);
+  --btn-outer: hsla(144deg 10% 22% / 25%);
+  --btn-glow-inner: hsla(144deg 83% 100% / 0%);
+  --btn-glow-outer: hsla(144deg 83% 100% / 0%);
+  --btn-reflex-bottom-1: 0%;
+  --btn-reflex-bottom-2: 0%;
+  --btn-reflex-top-1: 0%;
+  --btn-reflex-top-2: 0%;
+  position: relative;
+  z-index: 1;
+  background: radial-gradient(ellipse 140% 70% at 50% 100%, hsla(144deg 100% 70%/var(--btn-reflex-bottom-1)) 0%, hsla(144deg 100% 70%/var(--btn-reflex-bottom-2)) 30%, rgba(102, 255, 163, 0) 100%), radial-gradient(ellipse 140% 70% at 50% 0%, hsla(144deg 100% 70%/var(--btn-reflex-top-1)) 0%, hsla(144deg 100% 70%/var(--btn-reflex-top-2)) 30%, rgba(102, 255, 163, 0) 100%), radial-gradient(ellipse at 50% 10%, var(--btn-glow-inner), var(--btn-glow-outer)), radial-gradient(var(--btn-inner), var(--btn-outer));
+  text-transform: capitalize;
+  border: none;
+  font-size: 24px;
+  width: 200px;
+  height: 50px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  border-radius: 15px;
+  text-shadow: 0 -1px rgba(38, 115, 69, 0.4);
+  box-shadow: inset 0 4px 1px -3px rgba(255, 255, 255, 0.1), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 4px 8px 5px rgba(9, 11, 10, 0.16), 0 2px 0 1px #1a1e1c, 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0), 0 1px 2px rgba(255, 255, 255, 0), 0 2px 0 rgba(255, 255, 255, 0), 0 4px 0 0 rgba(0, 255, 102, 0), 0 2px 0 3px rgba(0, 0, 0, 0.9), 0 3px 0 3px rgba(255, 255, 255, 0.04);
+  transition: --btn-glow-inner 200ms, --btn-inner 200ms, --btn-outer 200ms, --btn-reflex-bottom-1 500ms, --btn-reflex-bottom-2 500ms, --btn-reflex-top-1 500ms, --btn-reflex-top-2 500ms, box-shadow 200ms, text-shadow 400ms, transform 200ms;
+}
+
+.btn:hover {
+  --btn-glow-inner: hsla(144deg 83% 100% / 20%);
+  --btn-inner: hsla(144deg 50% 50% / 100%);
+  --btn-outer: hsla(144deg 83% 50% / 100%);
+  cursor: pointer;
+  color: white;
+  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 3px 0 1px rgba(68, 238, 136, 0.7), 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.15), 0 4px 32px 2px rgba(0, 255, 102, 0.25), 0 3px 0 3px rgba(0, 0, 0, 0.8), 0 3px 0 4px rgba(38, 115, 69, 0.4);
+  text-shadow: 0 -1px rgba(38, 115, 69, 0.4), 0 0 4px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  transition: --btn-glow-inner 200ms, --btn-inner 200ms, --btn-outer 500ms, --btn-reflex-bottom-1 500ms, --btn-reflex-bottom-2 500ms, --btn-reflex-top-1 500ms, --btn-reflex-top-2 500ms, box-shadow 200ms, text-shadow 400ms, transform 200ms;
+}
+
+.btn.--yellow:hover {
+  --btn-inner: hsl(60 40% 40% / 1);
+  --btn-outer: hsl(60 80% 80% / 1);
+  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 3px 0 1px rgba(143, 143, 61, 0.9), 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.15), 0 4px 32px 2px rgba(245, 245, 163, 0.9), 0 3px 0 3px rgba(0, 0, 0, 0.8), 0 3px 0 4px rgba(38, 115, 69, 0.4);
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 0px 0 1px rgba(68, 238, 136, 0.7), 0 1px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.2), 0 4px 32px 2px rgba(0, 255, 102, 0.3), 0 0px 0 3px rgba(0, 0, 0, 0.5), 0 0px 1px 4px rgba(38, 115, 69, 0.4);
+  transition: --btn-glow-inner 200ms, --btn-inner 200ms, --btn-outer 500ms, --btn-reflex-bottom-1 500ms, --btn-reflex-bottom-2 500ms, --btn-reflex-top-1 500ms, --btn-reflex-top-2 500ms, box-shadow 200ms, text-shadow 400ms, transform 200ms;
+}
+
+@property --btn-inner {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(50, 62, 55, 0.35);
+}
+@property --btn-outer {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(50, 62, 55, 0.25);
+}
+@property --btn-glow-inner {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(255, 255, 255, 0);
+}
+@property --btn-glow-outer {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(255, 255, 255, 0);
+}
+@property --btn-reflex-bottom-1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --btn-reflex-bottom-2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --btn-reflex-top-1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --btn-reflex-top-2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+/* Board */
+
+.c-board {
+  width: fit-content;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.c-board > section {
+  padding: 10px 0;
+}
+
+.c-board .c-board__btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.c-board .c-board__game {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.c-board .c-board__colors {
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  justify-items: stretch;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
+.c-board .c-board__colors p {
+  min-width: 160px;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.c-board .c-board__turn {
+  display: flex;
+  justify-content: center;
+}
+
+.c-board .c-board__cell {
+  width: 70px;
+  height: 70px;
   border: 2px solid #eee;
   border-radius: 45px;
   display: grid;
@@ -142,72 +286,99 @@ body {
   cursor: pointer;
 }
 
-.cell.blue {
-  background-color: blue;
-  transition-property: background-color;
-  transition-duration: .167s;
-  /* transition-delay: 0.835s; */
+.c-board .c-board__cell.is-turn {
+  pointer-events: none;
 }
 
-.cell.red {
-  background-color: red;
-  transition-property: background-color;
-  transition-duration: .167s;
-  /* transition-delay: 0.835s; */
-}
-
-.cell.blue::before {
-  background-color: blue;
-}
-
-.cell.red::before {
-  background-color: red;
-}
-
-.cell::before {
+.c-board .c-board__cell::before {
   content: "";
   position: absolute;
-  width: 80px;
-  height: 80px;
-  background-color: white;
+  width: 70px;
+  height: 70px;
+  /* background-color: white; */
   border: 2px solid #eee;
   transform-origin: bottom;
   opacity: 0;
   border-radius: 45px;
 }
 
-.cell.is-dropping::before {
+.c-board .c-board__cell.--orange {
+  background-color: #e66210;
+  transition-property: background-color;
+  transition-duration: .167s;
+}
+
+.c-board .c-board__cell.--blue {
+  background-color: #36BCAF;
+  transition-property: background-color;
+  transition-duration: .167s;
+}
+
+.c-board .c-board__cell.--orange::before {
+  background-color: var(--orange);
+}
+
+.c-board .c-board__cell.--blue::before {
+  background-color: var(--blue);
+}
+
+.c-board .c-board__cell.is-dropping::before {
   animation-name: drop;
   animation-fill-mode: forwards;
 }
 
-/* Modify when the animation has to start, in order to start when the previous one is finishing*/
-.cell.is-dropping.animation-0::before {
+.c-board .c-board__cell.is-dropping.is-animation-0::before {
   animation-delay: 0s;
   animation-duration: 0.167s;
 }
 
-.cell.is-dropping.animation-1::before {
+.c-board .c-board__cell.is-dropping.is-animation-1::before {
   animation-delay: 0.167s;
   animation-duration: 0.167s;
 }
 
-.cell.is-dropping.animation-2::before {
+.c-board .c-board__cell.is-dropping.is-animation-2::before {
   animation-delay: 0.334s;
   animation-duration: 0.167s;
 }
 
-.cell.is-dropping.animation-3::before {
+.c-board .c-board__cell.is-dropping.is-animation-3::before {
   animation-delay: 0.501s;
   animation-duration: 0.167s;
 }
 
-.cell.is-dropping.animation-4::before {
+.c-board .c-board__cell.is-dropping.is-animation-4::before {
   animation-delay: 0.668s;
   animation-duration: 0.167s;
 }
 
-.cell.is-dropping.animation-5::before {
+.c-board .c-board__cell.is-dropping.is-animation-5::before {
   animation-delay: 0.835s;
   animation-duration: 0.167s;
+}
+
+/* Modal */
+
+.c-modal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.c-modal .c__text {
+  background: #111;
+  height: 300px;
+  width: 320px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }

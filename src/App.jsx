@@ -1,5 +1,5 @@
 import './App.css'
-import { TURNS } from './constants'
+import { TURNS, COLORS } from './constants'
 import { WinnerModal } from './components/WinnerModal'
 import { checkWinner, checkTie, updateBeforeColor, pointerEVents, lowestUnoccupiedCell } from './logic/board.js'
 import { Cell } from './components/Cell'
@@ -15,17 +15,17 @@ function App () {
 
   const [turn, setTurn] = useState(() => {
     const savedTurn = window.localStorage.getItem('turn')
-    return savedTurn || TURNS.blue
+    return savedTurn || TURNS.orange
+  })
+
+  const [orangeWins, setOrangeWins] = useState(() => {
+    const savedOrangeWins = window.localStorage.getItem('orangeWins')
+    return savedOrangeWins ? JSON.parse(savedOrangeWins) : 0
   })
 
   const [blueWins, setBlueWins] = useState(() => {
     const savedBlueWins = window.localStorage.getItem('blueWins')
     return savedBlueWins ? JSON.parse(savedBlueWins) : 0
-  })
-
-  const [redWins, setRedWins] = useState(() => {
-    const savedRedWins = window.localStorage.getItem('redWins')
-    return savedRedWins ? JSON.parse(savedRedWins) : 0
   })
 
   const [winner, setWinner] = useState(null)
@@ -42,10 +42,10 @@ function App () {
     setBoard(newBoard)
 
     // change turn
-    const newTurn = turn === TURNS.blue ? TURNS.red : TURNS.blue
-    updateBeforeColor(turn === TURNS.blue ? 'blue' : 'red')
+    const newTurn = turn === TURNS.orange ? TURNS.blue : TURNS.orange
+    updateBeforeColor(turn === TURNS.orange ? COLORS.orange : COLORS.blue)
     setTurn(newTurn)
-
+    console.log(COLORS.orange)
     pointerEVents()
 
     // save to local storage
@@ -56,12 +56,12 @@ function App () {
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       setWinner(newWinner)
-      if (newWinner === TURNS.blue) {
+      if (newWinner === TURNS.orange) {
+        setOrangeWins(orangeWins + 1)
+        window.localStorage.setItem('orangeWins', orangeWins + 1)
+      } else if (newWinner === TURNS.blue) {
         setBlueWins(blueWins + 1)
         window.localStorage.setItem('blueWins', blueWins + 1)
-      } else if (newWinner === TURNS.red) {
-        setRedWins(redWins + 1)
-        window.localStorage.setItem('redWins', redWins + 1)
       }
       confetti()
       confetti()
@@ -76,31 +76,35 @@ function App () {
 
   const resetGame = () => {
     setBoard(Array(42).fill(null))
-    setTurn(TURNS.blue)
+    setTurn(TURNS.orange)
     setWinner(null)
     window.localStorage.removeItem('board')
     window.localStorage.removeItem('turn')
   }
 
   const resetWins = () => {
+    setOrangeWins(0)
     setBlueWins(0)
-    setRedWins(0)
+    window.localStorage.removeItem('orangeWins')
     window.localStorage.removeItem('blueWins')
-    window.localStorage.removeItem('redWins')
   }
 
   return (
     <>
-    <main className='board'>
+    <main className='c-board'>
     <h1>Connect 4!</h1>
-    <p>Blue wins: {blueWins}</p>
-    <p>Red wins: {redWins}</p>
-    <button onClick={resetGame}>Reset game</button>
-    <button onClick={resetWins}>Reset wins</button>
-    <section>
+    <section className="c-board__btns">
+    <button className="btn" onClick={resetGame}>Reset game</button>
+    <button className="btn --yellow" onClick={resetWins}>Reset wins</button>
+    </section>
+    <section className="c-board__colors">
+    <p className="is-orange"><em>Orange</em> {orangeWins}</p>
+    <p className="is-blue"><em>Blue</em> {blueWins}</p>
+    </section>
+    <section className="c-board__turn">
       <Cell turnCell={turn}></Cell>
     </section>
-    <section className="game">
+    <section className="c-board__game">
     {
       board.map((cell, index) => {
         return <Cell key={index} index={index} gameCell={cell} updateBoard={updateBoard} />
