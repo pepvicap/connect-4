@@ -5,12 +5,13 @@
   font-weight: 400;
   color-scheme: light dark;
   color: #EEE;
-  background-color: #223F4D;
+  background-color: var(--main);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --main: #223F4D;
   --orange: #E66210;
   --blue: #36BCAF;
 }
@@ -75,11 +76,6 @@ h1 {
 
 h2 {
   margin: 0 auto;
-  width: fit-content;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  padding: 20px;
-  text-transform: uppercase;
 }
 
 em {
@@ -370,15 +366,34 @@ em {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.c-modal .c__text {
-  background: #111;
-  height: 300px;
+.c-modal .c-modal__content {
+  background: var(--main);
+  height: 320px;
   width: 320px;
   border: 2px solid #eee;
-  border-radius: 10px;
+  border-radius: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+}
+
+.c-modal .c-modal__content > h2 {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-modal.is-hidden {
+  display: none;
+}
+
+/* Close */
+
+.c-close {
+  display: flex;
+  cursor: pointer;
+  margin: 10px 0;
 }

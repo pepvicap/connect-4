@@ -45,7 +45,6 @@ function App () {
     const newTurn = turn === TURNS.orange ? TURNS.blue : TURNS.orange
     updateBeforeColor(turn === TURNS.orange ? COLORS.orange : COLORS.blue)
     setTurn(newTurn)
-    console.log(COLORS.orange)
     pointerEVents()
 
     // save to local storage
