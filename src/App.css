@@ -33,9 +33,9 @@
 @font-face {
   font-family: "Raleway", sans-serif;
   src: url("fonts/Raleway-Regular.woff2") format("woff2"),
-  url("fonts/Raleway-Regular.woff") format("woff"),
-  url("fonts/Raleway-Regular.ttf") format("truetype"),
-  url("fonts/Raleway-Regular.eot") format("embedded-opentype");
+    url("fonts/Raleway-Regular.woff") format("woff"),
+    url("fonts/Raleway-Regular.ttf") format("truetype"),
+    url("fonts/Raleway-Regular.eot") format("embedded-opentype");
   font-weight: 400;
   font-display: swap
 }
@@ -43,9 +43,9 @@
 @font-face {
   font-family: "Raleway", sans-serif;
   src: url("fonts/Raleway-Regular.woff2") format("woff2"),
-  url("fonts/Raleway-Regular.woff") format("woff"),
-  url("fonts/Raleway-Regular.ttf") format("truetype"),
-  url("fonts/Raleway-Regular.eot") format("embedded-opentype");
+    url("fonts/Raleway-Regular.woff") format("woff"),
+    url("fonts/Raleway-Regular.ttf") format("truetype"),
+    url("fonts/Raleway-Regular.eot") format("embedded-opentype");
   font-weight: 700;
   font-display: swap
 }
@@ -55,8 +55,6 @@ body {
   display: flex;
   justify-content: center;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 * {
@@ -87,11 +85,11 @@ em {
   font-style: normal;
 }
 
-.is-orange > em{
+.is-orange>em {
   color: var(--orange);
 }
 
-.is-blue > em{
+.is-blue>em {
   color: var(--blue);
 }
 
@@ -169,7 +167,7 @@ em {
   --btn-outer: hsla(144deg 83% 50% / 100%);
   cursor: pointer;
   color: white;
-  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 3px 0 1px rgba(68, 238, 136, 0.7), 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.15), 0 4px 32px 2px rgba(0, 255, 102, 0.25), 0 3px 0 3px rgba(0, 0, 0, 0.8), 0 3px 0 4px rgba(38, 115, 69, 0.4);
+  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 3px 0 1px rgba(68, 238, 136, 0.7), 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.15), 0 4px 30px 8px rgba(0, 255, 102, 0.6), 0 3px 0 3px rgba(0, 0, 0, 0.8), 0 3px 0 4px rgba(38, 115, 69, 0.4);
   text-shadow: 0 -1px rgba(38, 115, 69, 0.4), 0 0 4px rgba(255, 255, 255, 0.4);
   transform: translateY(-1px);
   transition: --btn-glow-inner 200ms, --btn-inner 200ms, --btn-outer 500ms, --btn-reflex-bottom-1 500ms, --btn-reflex-bottom-2 500ms, --btn-reflex-top-1 500ms, --btn-reflex-top-2 500ms, box-shadow 200ms, text-shadow 400ms, transform 200ms;
@@ -178,7 +176,7 @@ em {
 .btn.--yellow:hover {
   --btn-inner: hsl(60 40% 40% / 1);
   --btn-outer: hsl(60 80% 80% / 1);
-  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 3px 0 1px rgba(143, 143, 61, 0.9), 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.15), 0 4px 32px 2px rgba(245, 245, 163, 0.9), 0 3px 0 3px rgba(0, 0, 0, 0.8), 0 3px 0 4px rgba(38, 115, 69, 0.4);
+  box-shadow: inset 0 -1px 2px 1px rgba(255, 255, 255, 0.3), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 0 24px rgba(26, 77, 46, 0.3), 0 3px 0 1px rgba(143, 143, 61, 0.9), 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 16px rgba(255, 255, 255, 0.15), 0px 4px 30px 2px rgba(245, 245, 163, 0.5), 0 3px 0 3px rgba(0, 0, 0, 0.8), 0px 2px 30px 2px rgba(245, 245, 163, 0.9);
 }
 
 .btn:active {
@@ -192,36 +190,43 @@ em {
   inherits: false;
   initial-value: rgba(50, 62, 55, 0.35);
 }
+
 @property --btn-outer {
   syntax: "<color>";
   inherits: false;
   initial-value: rgba(50, 62, 55, 0.25);
 }
+
 @property --btn-glow-inner {
   syntax: "<color>";
   inherits: false;
   initial-value: rgba(255, 255, 255, 0);
 }
+
 @property --btn-glow-outer {
   syntax: "<color>";
   inherits: false;
   initial-value: rgba(255, 255, 255, 0);
 }
+
 @property --btn-reflex-bottom-1 {
   syntax: "<percentage>";
   inherits: false;
   initial-value: 0%;
 }
+
 @property --btn-reflex-bottom-2 {
   syntax: "<percentage>";
   inherits: false;
   initial-value: 0%;
 }
+
 @property --btn-reflex-top-1 {
   syntax: "<percentage>";
   inherits: false;
   initial-value: 0%;
 }
+
 @property --btn-reflex-top-2 {
   syntax: "<percentage>";
   inherits: false;
@@ -236,7 +241,7 @@ em {
   text-align: center;
 }
 
-.c-board > section {
+.c-board>section {
   padding: 10px 0;
 }
 
@@ -254,7 +259,7 @@ em {
 
 .c-board .c-board__colors {
   display: grid;
-  grid-template-columns: repeat(2,auto);
+  grid-template-columns: repeat(2, auto);
   justify-items: stretch;
   align-items: center;
   justify-content: center;
@@ -275,6 +280,8 @@ em {
 .c-board .c-board__cell {
   width: 70px;
   height: 70px;
+  max-height: 70px;
+  max-width: 70px;
   border: 2px solid #eee;
   border-radius: 45px;
   display: grid;
@@ -291,7 +298,8 @@ em {
   position: absolute;
   width: 70px;
   height: 70px;
-  /* background-color: white; */
+  max-width: 70px;
+  max-height: 70px;
   border: 2px solid #eee;
   transform-origin: bottom;
   opacity: 0;
@@ -368,22 +376,28 @@ em {
 
 .c-modal .c-modal__content {
   background: var(--main);
-  height: 320px;
-  width: 320px;
+  height: 300px;
+  width: 300px;
   border: 2px solid #eee;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 9;
 }
 
-.c-modal .c-modal__content > h2 {
+.c-modal .c-modal__content>h2 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+  margin-bottom: 100px;
+}
+
+.c-modal .c-modal__content>h2>em {
+  margin-right: 10px;
 }
 
 .c-modal.is-hidden {
@@ -395,5 +409,65 @@ em {
 .c-close {
   display: flex;
   cursor: pointer;
-  margin: 10px 0;
+  padding: 30px 30px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+
+  :root {
+    --gap: 7.5px;
+    --columns: 7;
+    --max-width: 92vw;
+  }
+
+  .c-board .c-board__cell {
+    width: calc((92vw - (var(--gap) * 6)) / var(--columns));
+    height: calc((92vw - (var(--gap) * 6)) / var(--columns));
+    overflow: hidden;
+
+  }
+
+  .c-board .c-board__cell::before {
+    width: calc((92vw - (var(--gap) * 6)) / var(--columns));
+    height: calc((92vw - (var(--gap) * 6)) / var(--columns));
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  em {
+    font-size: 20px;
+  }
+
+  .btn {
+    width: 170px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .c-board .c-board__game {
+    gap: var(--gap);
+  }
+
+  .c-board .c-board__btns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .c-board .c-board__btns>* {
+    margin: 10px 0;
+  }
+
+  .c-board .c-board__colors p {
+    min-width: 100px;
+  }
+
+
+  .c-modal .c-modal__content {
+    height: 50vh;
+    width: 80vw;
+  }
 }
