@@ -159,6 +159,10 @@ em {
   text-shadow: 0 -1px rgba(38, 115, 69, 0.4);
   box-shadow: inset 0 4px 1px -3px rgba(255, 255, 255, 0.1), inset 0 17px 2px -16px rgba(153, 255, 194, 0), inset 0 4px 8px 5px rgba(9, 11, 10, 0.16), 0 2px 0 1px #1a1e1c, 0 3px 0 -1px rgba(102, 204, 143, 0), inset 0 -1px 2px 1px rgba(255, 255, 255, 0), 0 1px 2px rgba(255, 255, 255, 0), 0 2px 0 rgba(255, 255, 255, 0), 0 4px 0 0 rgba(0, 255, 102, 0), 0 2px 0 3px rgba(0, 0, 0, 0.9), 0 3px 0 3px rgba(255, 255, 255, 0.04);
   transition: --btn-glow-inner 200ms, --btn-inner 200ms, --btn-outer 200ms, --btn-reflex-bottom-1 500ms, --btn-reflex-bottom-2 500ms, --btn-reflex-top-1 500ms, --btn-reflex-top-2 500ms, box-shadow 200ms, text-shadow 400ms, transform 200ms;
+  -webkit-appearance: none;
+  -webkit-text-fill-color: white;
+  opacity: 1;
+  -webkit-opacity: 1;
 }
 
 .btn:hover {
@@ -278,6 +282,7 @@ em {
 }
 
 .c-board .c-board__cell {
+  position: relative;
   width: 70px;
   height: 70px;
   max-height: 70px;
@@ -287,6 +292,9 @@ em {
   display: grid;
   place-items: center;
   cursor: pointer;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .c-board .c-board__cell.is-turn {
@@ -318,6 +326,7 @@ em {
   transition-duration: .167s;
 }
 
+/* Before */
 .c-board .c-board__cell.--orange::before {
   background-color: var(--orange);
 }
@@ -363,10 +372,11 @@ em {
 
 /* Modal */
 
-.c-modal {
+section.c-modal {
+  padding: 0;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   display: grid;
@@ -374,7 +384,7 @@ em {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.c-modal .c-modal__content {
+section.c-modal .c-modal__content {
   background: var(--main);
   height: 300px;
   width: 300px;
@@ -387,7 +397,7 @@ em {
   z-index: 9;
 }
 
-.c-modal .c-modal__content>h2 {
+section.c-modal .c-modal__content>h2 {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -396,11 +406,11 @@ em {
   margin-bottom: 100px;
 }
 
-.c-modal .c-modal__content>h2>em {
+section.c-modal .c-modal__content>h2>em {
   margin-right: 10px;
 }
 
-.c-modal.is-hidden {
+section.c-modal.is-hidden {
   display: none;
 }
 
@@ -420,18 +430,6 @@ em {
     --gap: 7.5px;
     --columns: 7;
     --max-width: 92vw;
-  }
-
-  .c-board .c-board__cell {
-    width: calc((92vw - (var(--gap) * 6)) / var(--columns));
-    height: calc((92vw - (var(--gap) * 6)) / var(--columns));
-    overflow: hidden;
-
-  }
-
-  .c-board .c-board__cell::before {
-    width: calc((92vw - (var(--gap) * 6)) / var(--columns));
-    height: calc((92vw - (var(--gap) * 6)) / var(--columns));
   }
 
   h1 {
@@ -457,6 +455,17 @@ em {
     align-items: center;
   }
 
+  .c-board .c-board__cell {
+    width: calc((92vw - (var(--gap) * 6)) / var(--columns));
+    height: calc((92vw - (var(--gap) * 6)) / var(--columns));
+    overflow: hidden;
+  }
+
+  .c-board .c-board__cell::before {
+    width: calc((92vw - (var(--gap) * 6)) / var(--columns));
+    height: calc((92vw - (var(--gap) * 6)) / var(--columns));
+  }
+
   .c-board .c-board__btns>* {
     margin: 10px 0;
   }
@@ -465,8 +474,7 @@ em {
     min-width: 100px;
   }
 
-
-  .c-modal .c-modal__content {
+  section.c-modal .c-modal__content {
     height: 50vh;
     width: 80vw;
   }

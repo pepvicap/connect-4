@@ -2,6 +2,8 @@ export const CloseModal = () => {
   const handleClick = () => {
     const modal = document.querySelector('.c-modal')
     modal.classList.add('is-hidden')
+    const body = document.querySelector('body')
+    body.style.overflow = 'auto'
   }
 
   return (
