@@ -4,6 +4,10 @@ export const checkWinner = (board) => {
     for (let col = 0; col < 4; col++) {
       const index = row * 7 + col
       if (board[index] && board[index] === board[index + 1] && board[index] === board[index + 2] && board[index] === board[index + 3]) {
+        [index, index + 1, index + 2, index + 3].forEach(index => {
+          const cell = document.getElementById(`cell-${index}`)
+          cell.classList.add('is-winner')
+        })
         return board[index]
       }
     }
@@ -12,6 +16,10 @@ export const checkWinner = (board) => {
   // check vertical
   for (let index = 0; index < 21; index++) {
     if (board[index] && board[index] === board[index + 7] && board[index] === board[index + 14] && board[index] === board[index + 21]) {
+      [index, index + 7, index + 14, index + 21].forEach(index => {
+        const cell = document.getElementById(`cell-${index}`)
+        cell.classList.add('is-winner')
+      })
       return board[index]
     }
   }
@@ -21,6 +29,10 @@ export const checkWinner = (board) => {
     for (let col = 0; col < 4; col++) {
       const index = row * 7 + col
       if (board[index] && board[index] === board[index + 7 + 1] && board[index] === board[index + 14 + 2] && board[index] === board[index + 21 + 3]) {
+        [index, index + 7 + 1, index + 14 + 2, index + 21 + 3].forEach(index => {
+          const cell = document.getElementById(`cell-${index}`)
+          cell.classList.add('is-winner')
+        })
         return board[index]
       }
     }
@@ -31,6 +43,10 @@ export const checkWinner = (board) => {
     for (let col = 3; col < 7; col++) {
       const index = row * 7 + col
       if (board[index] && board[index] === board[index + 7 - 1] && board[index] === board[index + 14 - 2] && board[index] === board[index + 21 - 3]) {
+        [index, index + 7 - 1, index + 14 - 2, index + 21 - 3].forEach(index => {
+          const cell = document.getElementById(`cell-${index}`)
+          cell.classList.add('is-winner')
+        })
         return board[index]
       }
     }

@@ -109,6 +109,17 @@ em {
   }
 }
 
+@keyframes border-color-change {
+  0% { border-color: #eee; }
+  25% { border-color: black; }
+  50% { border-color: #eee; }
+  75% { border-color: black; }
+  100% { border-color: #eee; }
+}
+
+.c-board .c-board__cell.is-winner {
+  animation: border-color-change 2s infinite;
+}
 /* Buttons */
 
 
@@ -247,6 +258,23 @@ em {
 
 .c-board>section {
   padding: 10px 0;
+}
+
+.c-board .c-board__links {
+  display: flex;
+  grid-template-columns: auto auto;
+  justify-content: center;
+}
+
+.c-board .c-board__links a {
+  padding: 0 20px;
+  max-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.c-board .c-board__links a:first-child {
+  border-right: 2px solid white;
 }
 
 .c-board .c-board__btns {
