@@ -6,6 +6,8 @@ export function WinnerModal ({ winner, resetGame }) {
   const color = winner === 'Orange' ? 'is-orange' : 'is-blue'
   const modal = document.querySelectorAll('.c-modal')
   modal.forEach(modal => modal.classList.remove('is-hidden'))
+  const html = document.querySelector('html')
+  html.style.overflow = 'hidden'
   const modalStyle = {
     height: window.innerHeight + 'px'
   }
