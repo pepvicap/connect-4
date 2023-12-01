@@ -3,7 +3,7 @@ import { TURNS, COLORS } from './constants'
 import { WinnerModal } from './components/WinnerModal'
 import { checkWinner, checkTie, updateBeforeColor, pointerEVents, lowestUnoccupiedCell } from './logic/board.js'
 import { Cell } from './components/Cell'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import confetti from 'canvas-confetti'
 
 function App () {
@@ -29,6 +29,16 @@ function App () {
   })
 
   const [winner, setWinner] = useState(null)
+  const [winningCells, setWinningCells] = useState([])
+
+  useEffect(() => {
+    if (winningCells) {
+      winningCells.forEach(index => {
+        const cell = document.getElementById(`cell-${index}`)
+        cell.classList.add('is-winner')
+      })
+    }
+  }, [winningCells])
 
   const updateBoard = (index) => {
     // check if cell is already occupied or if there is a winner
@@ -54,7 +64,9 @@ function App () {
     // check winner
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
-      setWinner(newWinner)
+      setWinningCells(newWinner.winningCells)
+      setWinner(newWinner.board)
+      console.log(newWinner)
       if (newWinner === TURNS.orange) {
         setOrangeWins(orangeWins + 1)
         window.localStorage.setItem('orangeWins', orangeWins + 1)
@@ -62,6 +74,7 @@ function App () {
         setBlueWins(blueWins + 1)
         window.localStorage.setItem('blueWins', blueWins + 1)
       }
+
       confetti()
       confetti()
       confetti()
