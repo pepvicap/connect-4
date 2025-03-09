@@ -4,7 +4,7 @@ This project is a web-based implementation of the classic game "Connect 4". It i
 <br><br>
 ## Demo
 
-https://peptramuntana-connect4.netlify.app/
+https://pepvicap-connect4.netlify.app/
 <br><br>
 ## Run Locally
 
